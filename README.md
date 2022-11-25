@@ -1,4 +1,4 @@
-# Agfa-Schedule-System 
+# Agfa Healthcare | Scheduling System 
 
 To run this application from its source code, you must host it locally. To do this, you can download MAMP or XAMPP and start the MySQL and Apache services. For files that make use of a SQL database, you will need to change the username and password to match your settings on MAMP or XAMPP. By default, the username and password for MAMP is "root" "root" (see image below). For XAMPP, the default username is "root" while the password is left empty. 
 ![image](https://user-images.githubusercontent.com/78287397/204029399-0c7c01d0-aaeb-4b47-ade3-482a472b5ada.png)
