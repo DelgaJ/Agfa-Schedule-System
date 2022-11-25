@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Link to css the site will use -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Link to js the site will use -->
+    <script src="script.js" defer></script>
+</head>
+
+<body onload="loadFileAndAddToDropdown('site_database.csv')">
+
+    <div class="container">
+        <div class="logo">
+            <!-- Display Agfa Logo (should be above input)-->
+            <img class="agfa-logo" src="agfaLogo.jpg" />
+        </div>
+
+        <!-- Create a drop down menu with sites in it-->
+        <div class="dropdown">
+            <button onclick="displaySites()" class="dropbtn">Site Select</button>
+            <div id="myDropdown" class="dropdown-content">
+                <!-- Dropdown list populated by site_database.csv entries -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
