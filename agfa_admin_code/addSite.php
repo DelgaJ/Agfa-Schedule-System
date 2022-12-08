@@ -1,65 +1,25 @@
 <?php
 
-function createSiteFile()
-{
-    // User input for site name
-    $sn = $_REQUEST['site_name'];
+$site_name = $_POST['site_name'];
+$start_date = $_POST['start_date'];
+$end_date = $_POST['end_date'];
 
-    // Replaces spaces in site name with underscores and adds file type
-    $sn = preg_replace('/\s+/', '_', $sn) . '.csv';
+require('../mysqli_connect.php');
 
-    // Converts site name to all lowercase
-    $sn = strtolower($sn);
+$six_digit_random_number = random_int(100000, 999999);
 
-    // Creates .csv file for new site
-    $fp2 = fopen($sn, 'w');
+$id_check = "SELECT DISTINCT site_name FROM site WHERE site_id = '{$six_digit_random_number}'";
+$result = @mysqli_query($dbc, $id_check);
 
-    // Closes the file
-    fclose($fp2);
+while ($result->num_rows == 1) {
+    $six_digit_random_number = random_int(100000, 999999);
+    $id_check = "SELECT DISTINCT site_name FROM site WHERE site_id = '{$six_digit_random_number}'";
+    $result = @mysqli_query($dbc, $id_check);
 }
 
-function addSiteToDBFile($columns, $data)
-{
-    // Opens site database file
-    $fp = fopen('site_database.csv', 'a');
-
-    // Set variable to contents (if any) of site_database.csv
-    $content = file('site_database.csv');
-
-    // Checks contents of site_database.csv file to see if empty
-    $isEmpty = empty($content) || (count($content) == 1 && empty($content[0]));
-
-    // If .csv file empty, adds column names as first entry
-    if ($isEmpty == true) {
-        foreach ($columns as $fields) {
-            fputcsv($fp, $fields);
-        }
-    }
-
-    // Appends user input data to the file
-    fputcsv($fp, $data);
-
-    // Closes the file
-    fclose($fp);
-
-    // Function to create a .csv file for a newly added site
-    createSiteFile();
-}
-
-// Column names
-$columns = array(
-    ['site_name', 'start_date', 'end_date']
-);
-
-// Retrieve input data to add to .csv file from client
-$data = array(
-    $_POST['site_name'],
-    $_POST['start_date'],
-    $_POST['end_date']
-);
-
-// Function to add site to database file of site names
-addSiteToDBFile($columns, $data);
+$insert_site = "INSERT INTO site (site_id, site_name, start_date, end_date) VALUES
+('$six_digit_random_number', '$site_name', '$start_date', '$end_date');";
+$result = @mysqli_query($dbc, $insert_site);
 
 // Redirects user back to add site page
-header("Location: adminTest.html");
+header("Location: admin.html");

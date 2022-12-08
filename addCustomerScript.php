@@ -1,39 +1,25 @@
 <?php
 
-$ID = $_GET["id"];
-$Name = $_POST["cu_name"];
-$Email = $_POST["cu_email"];
+$att_name = $_POST['att_name'];
+$att_email = $_POST['att_email'];
+$att_status = $_POST['att_status'];
 
+require('mysqli_connect.php');
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$database = "Agfa";
+$site_id = $_GET["id"];
+$cs_date = $_GET["cs_date"];
+$cs_id = $_GET["cs_id"];
+$cs_name = $_GET["cs_name"];
 
-// Create connection
+$insert_course_attendee = "INSERT INTO course_attendee (att_id, cs_id, att_status, att_name, att_email, site_id) VALUES
+(NULL, '$cs_id', '$att_status', '$att_name', '$att_email', '$site_id');";
 
-$conn = new mysqli($servername, $username, $password, $database);
+$r = @mysqli_query($dbc, $insert_course_attendee);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-#$sql = "INSERT INTO `course`(`cs_id`, `cs_name`, `cs_time`, `cs_date`, `cs_room`) VALUES ($r_id, '$Title', '$Time', $f_date, $Location)";
-$sql = "UPDATE `course` SET `cs_customer`='{$Name}' WHERE cs_id = {$ID}";
-$result = $conn->query($sql);
-
-$sql2 = "INSERT INTO `customer`(`cu_name`, `cu_email`) VALUES ('{$Name}','{$Email}')";
-$result2 = $conn->query($sql2);
-
-
-
-
-if ($result === TRUE && $result2 === TRUE) {
-    header("Location: roster.php?id={$ID}");
+if ($r === TRUE) {
+    header("Location: roster.php?id=$site_id&cs_date=$cs_date&cs_id=$cs_id&cs_name=$cs_name");
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $dbc->error;
 }
 
-$conn->close();
+$dbc->close();

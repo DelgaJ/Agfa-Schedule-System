@@ -62,46 +62,67 @@
     }
 </style>
 
+<?php
+
+$site_id = $_GET["id"];
+$cs_date = $_GET["cs_date"];
+
+require('mysqli_connect.php');
+
+?>
+
 <div class="w3-sidebar w3-red w3-bar-block" style="width:11%">
     <div id=logo style="margin-left:8%">
         <img src="agfa_w.png" width="128" height="60" title="Logo of Agfa" alt="Logo" />
         <p></p>
     </div>
-    <a href="addCourse.php" class="w3-bar-item w3-button">Add Course</a>
-    <a href="form.php" class="w3-bar-item w3-button">Form Submission</a>
-    <a href="help.php" class="w3-bar-item w3-button">Help</a>
+    <a href="index.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">View Calendar</a>
+    <a href="addCourse.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">Add Course</a>
+    <a href="form.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">Form Submission</a>
+    <a href="help.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">Help</a>
 </div>
 
 <div style="margin-left:25%">
 
     <body>
 
-        <h2> Add New Course </h2>
+        <h2> Add New Course to <?php echo $_GET["cs_date"] ?> </h2>
 
-        <form action="addCourseScript.php" method="post">
+        <form action="addCourseScript.php?id=<?php echo $site_id . '&cs_date=' . $cs_date ?>" method="post">
             <table>
                 <tr>
                     <td align="right">Name:</td>
-                    <td align="left"><input type="text" name="cs_name" value="<?php echo $Title ?>"></td>
+                    <td align="left"><input type="text" name="cs_name"></td>
                 </tr>
                 <tr>
-                    <td align="right">Date:</td>
-                    <td align="left"><input type="text" name="cs_date" id="datepicker" value="<?php echo $Date ?>"></td>
-                    <?php
+                    <td align="right">Attendee Role:</td>
+                    <td align="left"><select name="role_name">
+                            <?php
 
-                    ?>
+                            $sql = "SELECT DISTINCT role_name FROM role;";
+                            $result = @mysqli_query($dbc, $sql);
+
+                            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                                $role_name = $row['role_name'];
+                                echo '<option value="' . $role_name . '">' . $role_name . '</option>';
+                            }
+
+                            ?>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td align="right">Time:</td>
-                    <td align="left"><input type="text" name="cs_time" id="timepicker" value="<?php echo $Time ?>"></td>
+                    <td align="right">Start Time:</td>
+                    <td align="left"><input type="time" name="cs_start"></td>
                 </tr>
-
-                <!--
-            <tr>
-                <td align="right">Location:</td>
-                <td align="left"><input type="text" name="cs_room" value="<?php echo $Location ?>"></td>
-            </tr>
--->
+                <tr>
+                    <td align="right">End Time:</td>
+                    <td align="left"><input type="time" name="cs_end"></td>
+                </tr>
+                <tr>
+                    <td align="right">Locaton:</td>
+                    <td align="left"><input type="text" name="cs_room"></td>
+                </tr>
 
             </table>
 

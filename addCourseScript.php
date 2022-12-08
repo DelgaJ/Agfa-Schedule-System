@@ -1,43 +1,25 @@
 <?php
 
-$ID = $_POST['cs_id'];
-$Title = $_POST["cs_name"];
-$Time = $_POST["cs_time"];
-$Date = $_POST["cs_date"];
+$Name = $_POST['cs_name'];
+$Role_Name = $_POST['role_name'];
+$Start_Time = $_POST["cs_start"];
+$End_Time = $_POST["cs_end"];
 $Location = $_POST["cs_room"];
-$Customer = $_POST["cs_customer"];
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$database = "Agfa";
+require('mysqli_connect.php');
 
-// Create connection
+$site_id = $_GET["id"];
+$cs_date = $_GET["cs_date"];
 
-$conn = new mysqli($servername, $username, $password, $database);
+$sql = "INSERT INTO course (cs_id, cs_name, cs_start, cs_end, cs_date, cs_room, site_id, role_name) VALUES
+(NULL, '$Name', '$Start_Time', '$End_Time', '$cs_date', '$Location', '$site_id', '$Role_Name');";
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-
-//Update everything except name and description
-$r_id = random_int(100000, 999999);
-#$f_date = date_format($Date, 'y-m-d');
-$arrdate = explode("/", $Date);
-$f_date = strval("{$arrdate[2]}" . "-" . "{$arrdate[0]}" . "-" . "{$arrdate[1]}");
-#echo $f_date;
-#$sql = "INSERT INTO `course`(`cs_id`, `cs_name`, `cs_time`, `cs_date`, `cs_room`) VALUES ($r_id, '$Title', '$Time', $f_date, $Location)";
-$sql = "INSERT INTO `course`(`cs_id`, `cs_name`, `cs_time`, `cs_date`) VALUES ($r_id,'$Title','$Time','$f_date')";
-
-$result = $conn->query($sql);
+$result = @mysqli_query($dbc, $sql);
 
 if ($result === TRUE) {
-    header("Location: index.php");
+    header("Location: courseList.php?id=$site_id&cs_date=$cs_date");
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $dbc->error;
 }
 
-$conn->close();
+$dbc->close();
