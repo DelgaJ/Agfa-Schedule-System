@@ -10,7 +10,8 @@
     cursor: pointer;
     border-radius: 25px;
     opacity: 85%;
-    margin-top: 15px; /* Adds small margin between button and logo image */
+    margin-top: 15px;
+    /* Adds small margin between button and logo image */
 }
 
 
@@ -100,4 +101,10 @@ p {
 
 .agfa-logo {
     width: 300px;
+}
+
+#delegar {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
 }

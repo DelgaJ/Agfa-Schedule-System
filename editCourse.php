@@ -22,6 +22,14 @@
 </script>
 
 <style>
+    * {
+        margin: -4px;
+    }
+
+    .w3-sidebar {
+        height: 101%;
+    }
+
     .myclass {
         display: inline-block;
         width: 175px;
@@ -52,14 +60,6 @@
     .adjust-line-height {
         line-height: 2em;
     }
-
-    * {
-        margin: 0;
-    }
-
-    body {
-        margin: 0;
-    }
 </style>
 
 <?php
@@ -75,7 +75,7 @@ require('mysqli_connect.php');
 
 <div class="w3-sidebar w3-red w3-bar-block" style="width:11%">
     <div id=logo style="margin-left:8%">
-        <img src="agfa_w.png" width="128" height="60" title="Logo of Agfa" alt="Logo" />
+        <a href="index.php?id=<?php echo $site_id ?>"><img src="agfa_w.png" width="128" height="60" title="Logo of Agfa" alt="Logo" /></a>
         <p></p>
     </div>
     <a href="index.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">View Calendar</a>

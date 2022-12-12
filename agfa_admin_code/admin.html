@@ -5,6 +5,26 @@
     <link rel="stylesheet" href="admin.css" />
 </head>
 
+<style>
+    #admin {
+        position: fixed;
+        left: 10px;
+        bottom: 10px;
+        background-color: #08042c;
+        color: white;
+        width: 100px;
+        padding: 5px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 25px;
+        opacity: 85%;
+        margin-top: 12px;
+        /* Adds small margin between button and logo image */
+        text-align: center;
+    }
+</style>
+
 <body>
     <h2><img src="agfaLogo.jpg" alt="AGFA Logo" /></h2>
     <div class="warpper">
@@ -13,24 +33,32 @@
 
         <div class="tabs">
             <label class="tab1" id="one-tab" for="one">Admin</label>
-            <label class="tab1" id="two-tab" for="two">Instructor</label>
+            <!-- <label class="tab1" id="two-tab" for="two">Instructor</label> -->
         </div>
 
         <div class="panels">
             <div class="panel" id="one-panel">
                 <div class="tab">
                     <button class="tablinks" onclick="openCity(event, 'Add Site')" id="defaultOpen">
-                        Add Site
-                    </button>
+              Add Site
+            </button>
                     <button class="tablinks" onclick="openCity(event, 'Add Role')">
-                        Add Role
-                    </button>
+              Add Role
+            </button>
+                    <button class="tablinks" onclick="openCity(event, 'Delete Site')">
+                Delete Site
+              </button>
+                    <button class="tablinks" onclick="openCity(event, 'Delete Role')">
+                Delete Role
+              </button>
+                    <!--
                     <button class="tablinks" onclick="openCity(event, 'View Calendar')">
-                        View Calendar
-                    </button>
+              View Calendar
+            </button>
                     <button class="tablinks" onclick="openCity(event, 'Upload Files')">
-                        Upload Files
-                    </button>
+              Upload Files
+            </button>
+            -->
                 </div>
 
                 <div id="Add Site" class="tabcontent">
@@ -65,13 +93,53 @@
 
                         <br /><br /> Select Number of Seats
 
-                        <br /> <input type="number" min="1" name="num_seats" />
+                        <br />
+                        <input type="number" min="1" name="num_seats" />
 
                         <br /><br />
 
                         <input type="submit" name="submit" value="Submit" />
                     </form>
                 </div>
+                <div id="Delete Site" class="tabcontent">
+                    <h3>DELETE SITE</h3>
+                    <!-- form tag to create form -->
+                    <form name="delete_site" form action="deleteSite.php" method="post">
+                        Site Name
+
+                        <br />
+
+                        <input type="text" placeholder="Enter Site Name" name="site_name" />
+
+                        <br /><br /> Select Week
+
+                        <br /> From: <input type="date" id="start_date" name="start_date" /> To:
+                        <input type="date" id="end_date" name="end_date" />
+
+                        <br /><br />
+
+                        <input type="submit" name="submit" value="Submit" />
+                    </form>
+                </div>
+                <div id="Delete Role" class="tabcontent">
+                    <h3>DELETE ROLE</h3>
+                    <!-- form tag to create form -->
+                    <form name="add_role" form action="deleteRole.php" method="post">
+                        Role Name
+
+                        <br />
+
+                        <input type="text" placeholder="Enter Role Name" name="role_name" />
+
+                        <br /><br /> Select Number of Seats
+
+                        <br />
+
+                        <input type="submit" name="submit" value="Submit" />
+                    </form>
+                </div>
+
+                <!-- 
                 <div id="View Calendar" class="tabcontent">
                     <h3>VIEW CALENDAR</h3>
                     <p>[Placeholder]</p>
@@ -85,27 +153,31 @@
                 <div class="panel-title">Instructor View</div>
                 <p>[Placeholder]</p>
             </div>
+
+            -->
+            </div>
         </div>
-    </div>
 
-    <script>
-        function openCity(evt, cityName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+        <script>
+            function openCity(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
             }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
 
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+        </script>
 </body>
+
+<a href="javascript:history.back()" id="admin">Back</a>
 
 </html>

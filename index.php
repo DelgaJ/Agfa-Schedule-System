@@ -55,11 +55,10 @@ require('mysqli_connect.php');
 
 <div class="w3-sidebar w3-red w3-bar-block" style="width:11%">
     <div id=logo style="margin-left:8%">
-        <img src="agfa_w.png" width="128" height="60" title="Logo of Agfa" alt="Logo" />
+        <a href="index.php?id=<?php echo $site_id ?>"><img src="agfa_w.png" width="128" height="60" title="Logo of Agfa" alt="Logo" /></a>
         <p></p>
     </div>
     <a href="index.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">View Calendar</a>
-    <a href="addCourse.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">Add Course</a>
     <a href="form.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">Form Submission</a>
     <a href="help.php?id=<?php echo $site_id ?>" class="w3-bar-item w3-button">Help</a>
 </div>

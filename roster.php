@@ -33,6 +33,14 @@ require('mysqli_connect.php');
 <div style="margin-left:25%">
 
     <style>
+        * {
+            margin: -4px;
+        }
+
+        .w3-sidebar {
+            height: 101%;
+        }
+
         .myclass {
             display: inline-block;
             width: 175px;
@@ -72,6 +80,7 @@ require('mysqli_connect.php');
         echo '<h2> Roster for ' . $cs_name . '</h2>';
 
         ?>
+
         <table>
             <thead>
                 <tr>
@@ -102,21 +111,20 @@ require('mysqli_connect.php');
                     echo '<td> <a href="deleteCustomerScript.php?id=' . $site_id . '&cs_date=' . $cs_date  . '&cs_id=' . $cs_id  . '&cs_name=' . $cs_name . '&att_id=' . $att_id . '">Delete</a></td>';
                     echo '</tr>';
                 }
-
                 ?>
 
             </tbody>
+
         </table>
         <p></p>
 
         <!-- Add Item -->
-
         <a href="addCustomer.php?id=<?php echo $site_id . '&cs_date=' . $cs_date  . '&cs_id=' . $cs_id  . '&cs_name=' . $cs_name ?>">
             <button type="submit">Add</button>
         </a>
-
-
-</div>
 </div>
 
-</div>
+
+
+
+</body>
