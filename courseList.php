@@ -39,6 +39,24 @@
     .adjust-line-height {
         line-height: 2em;
     }
+
+    #admin {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        background-color: #D1110E;
+        color: white;
+        width: 100px;
+        padding: 5px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 25px;
+        opacity: 85%;
+        margin-top: 12px;
+        /* Adds small margin between button and logo image */
+        text-align: center;
+    }
 </style>
 
 <?php
@@ -119,4 +137,6 @@ require('mysqli_connect.php');
         <a href="addCourse.php?id=<?php echo $site_id . '&cs_date=' . $cs_date ?>">
             <button type="submit">Add</button>
         </a>
+
+        <button onClick="window.print()" id="admin">Export</button>
         </form>

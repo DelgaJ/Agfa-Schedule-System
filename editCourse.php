@@ -145,7 +145,7 @@ require('mysqli_connect.php');
                     <td align="left"><input type="time" name="cs_end" value="<?php echo $End_Time; ?>"></td>
                 </tr>
                 <tr>
-                    <td align="right">Locaton:</td>
+                    <td align="right">Location:</td>
                     <td align="left"><input type="text" name="cs_room" value="<?php echo $Location; ?>"></td>
                 </tr>
 
